@@ -3,6 +3,8 @@ var map;
 var prague = {lat: 50.08804, lng: 14.42076};
 var cagliari = {lat: 39.23054, lng: 9.11917};
 
+// var sourceData = [prague, cagliari];
+
 var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
@@ -30,33 +32,50 @@ function initMap() {
     center: prague,
     zoom: 4
   });
+
+  addMapContent();
 }
 
-$( document ).ready(function() {
-  var marker = new google.maps.Marker({
-    position: prague,
-    map: map,
-    icon: 'https://maps.google.com/mapfiles/kml/shapes/info-i_maps.png'
-  });
 
-  var marker_2 = new google.maps.Marker({
-    position: cagliari,
-    map: map
-  });
-
+function addMapContent() {
   var infowindow = new google.maps.InfoWindow({
     content: contentString
   });
 
+  for (i=0; i<sourceData.length; i++)
+  {
+    console.log(sourceData[i].latitude);
+    console.log(sourceData[i].longitude);
+    var marker = new google.maps.Marker({
+      position: {
+        lat: sourceData[i].lattitude,
+        lng: sourceData[i].longitude
+      },
+      map: map,
+      icon: 'https://maps.google.com/mapfiles/kml/shapes/info-i_maps.png'
+    });
 
-  marker.addListener('click', function() {
-    map.setZoom(8);
-    map.setCenter(marker.getPosition());
-    alert("test");
-  });
+    // marker.addListener('click', function() {
+    //   map.setZoom(8);
+    //   map.setCenter(marker.getPosition());
+    //   console.log(marker);
+    // });
 
-  marker.addListener('click', function() {
-    infowindow.open(map, marker);
-  });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
 
-});
+
+  // var marker = new google.maps.Marker({
+  //   position: prague,
+  //   map: map,
+  //   icon: 'https://maps.google.com/mapfiles/kml/shapes/info-i_maps.png'
+  // });
+  //
+  // var marker_2 = new google.maps.Marker({
+  //   position: cagliari,
+  //   map: map
+  // });
+
+}
