@@ -25,8 +25,8 @@ function addMapContent() {
 
   for (i=0; i<sourceData.length; i++)
   {
-    console.log(sourceData[i].latitude);
-    console.log(sourceData[i].longitude);
+    // console.log(sourceData[i].latitude);
+    // console.log(sourceData[i].longitude);
     var marker = new google.maps.Marker({
       position: {
         lat: sourceData[i].latitude,
@@ -42,13 +42,13 @@ function addMapContent() {
     //   console.log(marker);
     // });
 
-    console.log(sourceData[i]);
+    // console.log(sourceData[i]);
     infowindow.setContent(getContent(sourceData[i]));
 
      google.maps.event.addListener(marker, 'click', function() {
 
       infowindow.open(map, this);
-      console.log('test');
+      // console.log('test');
     });
 
     markers.push(marker);
@@ -69,7 +69,13 @@ function addMapContent() {
 }
 
 function getContent(sourceData) {
-  console.log(sourceData);
-  var contentString = `<h2>${sourceData.Name}</h2><p>${sourceData.info}</p>`;
+  // console.log(sourceData);
+  var contentString = `<h2>${sourceData.Name}</h2><p>${sourceData.info}</p>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+    Launch demo modal
+  </button>
+
+`;
   return contentString;
 }
